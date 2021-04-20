@@ -1,5 +1,5 @@
 # Nestable-coordinate-system-for-TikZ-circuits
-More spaces can be easily allocated at any point in the new coordinate system for other circuits to nest and connected to without changing the original circuit logic.
+More spaces can be easily allocated at any position in the current circuit to allow other circuits to nest inside and be connected to it, without damaging the original circuit logic.
 
          Gang Liu (gl.cell@outlook, http://orcid.org/0000-0003-1575-9290)
               and
@@ -32,7 +32,7 @@ The CircuiTikZ package is very helpful in circuit design. Here a new coordinate 
     
 where the coordinate setting is for all combinations of the xxx and yyy components. Any of the xxx and yyy components can be manually changed later to allocate spaces from the coordinate, then coordinates after it will be moved the same distance as a whole.  Another way to get a new instance of the coordinate system is to copy the file coorddemobygangliu.tex in the example01 into another then substitute all "demobygangliu" strings with a chosen KEYWORD inside the new file.
 
-If circuits and/or parts of them are created by different specific instances of the coordinate system even by many people, they can be easily integrated, espectially some of them can be inserted into others then connected. 
+If circuits and/or parts of them are created with different specific instances of the coordinate system even by many people, they can be easily integrated, espectially some of them can be inserted into others then connected. 
 
 The new commands
 
