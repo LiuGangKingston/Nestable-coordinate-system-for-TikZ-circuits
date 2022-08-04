@@ -1,0 +1,1175 @@
+%   This is the only one tex file of example01 for 
+%   https://github.com/LiuGangKingston/Nestable-coordinate-system-for-Tikz-circuits.git
+%            Version 1.0
+%   free for non-commercial use.
+%   Please send us emails for any problems/suggestions/comments.
+%   Please be advised that none of us accept any responsibility
+%   for any consequences arising out of the usage of this
+%   software, especially for damage.
+%   For usage, please refer to the README file and the following lines.
+%   This code was written by
+%        Gang Liu (gl.cell@outlook)
+%                 (http://orcid.org/0000-0003-1575-9290)
+%          and
+%        Shiwei Huang (huang937@gmail.com)
+%   Copyright (c) 2021
+\documentclass[tikz,border=5mm]{standalone}
+%\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{calc,decorations.markings}
+\usetikzlibrary{shapes,arrows,positioning,decorations.markings}
+\usepackage{scalerel, circuitikz}
+\input{afewmorecommandsintikzpiture}
+
+
+
+
+\begin{document}
+
+
+{\Huge This is to show a new coordinate system, which can be keyworded with any lower-case letters for an instance for a specific circuit or a part of it, and used for circuits to be inserted into and connected with other circuits efficiently. Whatever the coordinate system is modified, the circuit logical structure should be not changed essentially. 
+\\
+\\
+Then many instances of such coordinate system can be used in ``one" big circuit.}
+
+\newpage
+
+\vspace{2cm}
+
+{\Large Figure 1, an instance of the coordinate system (with keyword ``demobygangliu") as background with two connected devices and a few dark points with some lables.}
+
+\begin{circuitikz}[scale=1]
+
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% ``Install" the coordinate system with keyword ``demobygangliu".
+\input{coorddemobygangliu}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (demobygangliupppii)) with letters as background, which would help to determine all coordinates. 
+\coordinatebackgroundxy{demobygangliu}{b}{c}{q}{a}{b}{s};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (demobygangliupppii) and name it as ``swopamp".
+\draw (demobygangliupppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the ``+" and ``-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\demobygangliuxxxg,\swopampzy)$);
+\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\demobygangliuxxxg,\swopampfy)$);
+\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\demobygangliuxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an ``npn" at (demobygangliupppmi) and name it as "swQ".
+\draw (demobygangliupppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\demobygangliuyyyj)$);
+\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\demobygangliuyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (demobygangliupppef) -- (demobygangliupppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+\end{circuitikz}
+
+\newpage
+
+{\Large Figure 2, the background of coordinate system with keyword ``w", where wxxxf, wxxxm, wyyyd, wyyyg, and wyyyk, are further manually increased by 1.3, 3.6 3.2, 4.5, and 2.9 respectively in the separate unique coordw.tex file, then the dashed lines are not evenly distributed, while the coordinate letters are still placed properly.}
+
+\begin{circuitikz}[scale=1]
+\input{coordw} 
+\coordinatebackground{w}{c}{d}{o};
+\end{circuitikz}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\vspace{2cm}
+
+{\Large Figure 3, a circuit is drawn (in five steps actually) with the help of the coordinate system ``demobygangliu".}
+
+\begin{circuitikz}[scale=1]
+
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword ``demobygangliu".
+\input{coorddemobygangliu}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (demobygangliupppii)) with letters as background, which would help to determine all coordinates. 
+\coordinatebackground{demobygangliu}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (demobygangliupppii) and name it as "swopamp".
+\draw (demobygangliupppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\demobygangliuxxxg,\swopampzy)$);
+\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\demobygangliuxxxg,\swopampfy)$);
+\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\demobygangliuxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (demobygangliupppmi) and name it as "swQ".
+\draw (demobygangliupppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\demobygangliuyyyj)$);
+\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\demobygangliuyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (demobygangliupppef) -- (demobygangliupppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+\draw  (demobygangliuppped) node [ground] {} to [empty ZZener diode] (demobygangliupppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\demobygangliuyyyd" and "\demobygangliuyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\demobygangliuyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\demobygangliuxxxe-1.3, \demobygangliuyyyd*0.5+\demobygangliuyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (demobygangliupppej) to [generic] (demobygangliupppel) -| (swQ.C);
+\node at ($(\demobygangliuxxxe-1.1, \demobygangliuyyyj*0.5+\demobygangliuyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\demobygangliuyyyj*0.5+\demobygangliuyyyl*0.5) {$I_C \approx \beta I_B$};
+
+\draw  (\swQEx, \demobygangliuyyyd) node [ground] {} to [generic] (\swQEx, \demobygangliuyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \demobygangliuyyyd*0.5+\demobygangliuyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+\draw  (\demobygangliuxxxi-0.2,\demobygangliuyyyn) --  (\demobygangliuxxxi+0.2,\demobygangliuyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+\draw [->] (demobygangliupppin) -- (demobygangliupppim) node [right] {$I$};  
+\draw  (demobygangliupppim) -- (demobygangliupppil);
+\fill  (demobygangliupppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (demobygangliupppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \demobygangliuyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \demobygangliuyyyd + 0.4)$);
+
+\draw [->] ($(\demobygangliuxxxe+0.4, \demobygangliuyyyl*0.5+\demobygangliuyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\demobygangliuxxxe+0.4, \demobygangliuyyyl*0.5+\demobygangliuyyyj*0.5 - 0.6)$);
+
+
+\end{circuitikz}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+\vspace{2cm}
+
+{\Large Figure 4, the same as the above but erasing the coordinate background by commenting out the one command 
+``\textbackslash coordinatebackground ..." line.}
+
+\begin{circuitikz}[scale=1]
+
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword ``demobygangliu".
+\input{coorddemobygangliu}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (demobygangliupppii)) with letters as background, which would help to determine all coordinates. 
+%\coordinatebackground{demobygangliu}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (demobygangliupppii) and name it as "swopamp".
+\draw (demobygangliupppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\demobygangliuxxxg,\swopampzy)$);
+%\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\demobygangliuxxxg,\swopampfy)$);
+%\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\demobygangliuxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (demobygangliupppmi) and name it as "swQ".
+\draw (demobygangliupppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\demobygangliuyyyj)$);
+%\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\demobygangliuyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (demobygangliupppef) -- (demobygangliupppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+\draw  (demobygangliuppped) node [ground] {} to [empty ZZener diode] (demobygangliupppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\demobygangliuyyyd" and "\demobygangliuyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\demobygangliuyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\demobygangliuxxxe-1.3, \demobygangliuyyyd*0.5+\demobygangliuyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (demobygangliupppej) to [generic] (demobygangliupppel) -| (swQ.C);
+\node at ($(\demobygangliuxxxe-1.1, \demobygangliuyyyj*0.5+\demobygangliuyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\demobygangliuyyyj*0.5+\demobygangliuyyyl*0.5) {$I_C \approx \beta I_B$};
+
+\draw  (\swQEx, \demobygangliuyyyd) node [ground] {} to [generic] (\swQEx, \demobygangliuyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \demobygangliuyyyd*0.5+\demobygangliuyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+\draw  (\demobygangliuxxxi-0.2,\demobygangliuyyyn) --  (\demobygangliuxxxi+0.2,\demobygangliuyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+\draw [->] (demobygangliupppin) -- (demobygangliupppim) node [right] {$I$};  
+\draw  (demobygangliupppim) -- (demobygangliupppil);
+\fill  (demobygangliupppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (demobygangliupppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \demobygangliuyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \demobygangliuyyyd + 0.4)$);
+
+\draw [->] ($(\demobygangliuxxxe+0.4, \demobygangliuyyyl*0.5+\demobygangliuyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\demobygangliuxxxe+0.4, \demobygangliuyyyl*0.5+\demobygangliuyyyj*0.5 - 0.6)$);
+
+
+\end{circuitikz}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+{\Huge Supposing the following two additional circuits will be inserted into the above one at proper positions, then connected.}
+
+\vspace{3cm}
+
+{\Large Figure 5, the first circuit to be inserted.}
+
+\vspace{2cm}
+
+\begin{circuitikz}
+% The following is the first circuit, which uses "h" coordinate system, to be inserted into and connected to the above circuit.
+% It is modified based on Figure 2.
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword "h".
+\input{coordh}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (hpppii)) with letters as background, which would help to determine all coordinates. 
+\coordinatebackground{h}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (hpppii) and name it as "swopamp".
+\draw (hpppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\hxxxg,\swopampzy)$);
+%\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\hxxxg,\swopampfy)$);
+%\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\hxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (hpppmi) and name it as "swQ".
+\draw (hpppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\hyyyj)$);
+%\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\hyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (hpppef) -- (hpppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+
+\draw   (hppped) to [empty ZZener diode] (hpppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\hyyyd" and "\hyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\hyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\hxxxe-1.3, \hyyyd*0.5+\hyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (hpppej) to [generic] (hpppel) -| (swQ.C);
+\node at ($(\hxxxe-1.1, \hyyyj*0.5+\hyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\hyyyj*0.5+\hyyyl*0.5) {$I_C \approx \beta I_B$};
+
+
+\draw  (\swQEx, \hyyyd) to [generic] (\swQEx, \hyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \hyyyd*0.5+\hyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+%\draw  (\hxxxi-0.2,\hyyyn) --  (\hxxxi+0.2,\hyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+%\draw [->] (hpppin) -- (hpppim) node [right] {$I$};  
+%\draw  (hpppim) -- (hpppil);
+%\fill  (hpppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (hpppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \hyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \hyyyd + 0.4)$);
+
+\draw [->] ($(\hxxxe+0.4, \hyyyl*0.5+\hyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\hxxxe+0.4, \hyyyl*0.5+\hyyyj*0.5 - 0.6)$);
+
+\end{circuitikz}
+
+
+\newpage
+
+{\Large Figure 6, the second circuit to be inserted.}
+
+
+
+\vspace{2cm}
+% page 185
+\begin{circuitikz}[scale=1]
+\input{coords}
+\coordinatebackground{s}{f}{g}{q};
+\draw (spppni) node [op amp] (opamp) {};
+\getxyingivenunit{cm}{(opamp.+)}{\opampzx}{\opampzy};
+\getxyingivenunit{cm}{(opamp.-)}{\opampfx}{\opampfy};
+
+\draw (\sxxxg,\opampzy) node [left] {$U_{we}$} to [R, l=$R_d$, -*]  (\sxxxj,\opampzy) 
+to [R, l=$R_d$, *-*] (opamp.+)
+to [C, l_=$C_{d2}$, *-] (\opampzx, \syyyf);
+
+\draw (opamp.out) |- (\sxxxl,\syyyk) to [C, l_=$C_{d1}$, *-] (\sxxxj,\syyyk) to [short](\sxxxj,\opampzy);
+
+\draw (opamp.-) -|  (\sxxxl,\syyyk);
+
+\draw (opamp.out) to [short, *-] (\sxxxq,\syyyi);
+
+
+
+\end{circuitikz}
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+\vspace{2cm}
+
+{\Large Figure 7, the coordinate system of the  original circuit is easily switched to the one with keyword ``g", which is adjusted to allocate  spaces for the two circuits to be inserted, without changing the circuit logic. (Keeping the ``demobygangliu" system unchanged, so that the above circuits using it are not affected.)} 
+
+\begin{circuitikz}[scale=1]
+
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword ``g".
+\input{coordg}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (gpppii)) with letters as background, which would help to determine all coordinates. 
+\coordinatebackground{g}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (gpppii) and name it as "swopamp".
+\draw (gpppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\gxxxg,\swopampzy)$);
+%\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\gxxxg,\swopampfy)$);
+%\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\gxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (gpppmi) and name it as "swQ".
+\draw (gpppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\gyyyj)$);
+%\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\gyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (gpppef) -- (gpppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+\draw  (gppped) node [ground] {} to [empty ZZener diode] (gpppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\gyyyd" and "\gyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\gyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\gxxxe-1.3, \gyyyd*0.5+\gyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (gpppej) to [generic] (gpppel) -| (swQ.C);
+\node at ($(\gxxxe-1.1, \gyyyj*0.5+\gyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\gyyyj*0.5+\gyyyl*0.5) {$I_C \approx \beta I_B$};
+
+\draw  (\swQEx, \gyyyd) node [ground] {} to [generic] (\swQEx, \gyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \gyyyd*0.5+\gyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+\draw  (\gxxxi-0.2,\gyyyn) --  (\gxxxi+0.2,\gyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+\draw [->] (gpppin) -- (gpppim) node [right] {$I$};  
+\draw  (gpppim) -- (gpppil);
+\fill  (gpppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (gpppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \gyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \gyyyd + 0.4)$);
+
+\draw [->] ($(\gxxxe+0.4, \gyyyl*0.5+\gyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\gxxxe+0.4, \gyyyl*0.5+\gyyyj*0.5 - 0.6)$);
+
+
+\end{circuitikz}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+{\Large Figure 8, then the two circuits are inserted and connected.}
+
+\begin{circuitikz}[scale=1]
+
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword ``g".
+\input{coordg}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (gpppii)) with letters as background, which would help to determine all coordinates. 
+\coordinatebackground{g}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (gpppii) and name it as "swopamp".
+\draw (gpppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\gxxxg,\swopampzy)$);
+%\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\gxxxg,\swopampfy)$);
+%\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\gxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (gpppmi) and name it as "swQ".
+\draw (gpppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\gyyyj)$);
+%\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\gyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (gpppef) -- (gpppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+\draw  (gppped) node [ground] {} to [empty ZZener diode] (gpppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\gyyyd" and "\gyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\gyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\gxxxe-1.3, \gyyyd*0.5+\gyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (gpppej) to [generic] (gpppel) -| (swQ.C);
+\node at ($(\gxxxe-1.1, \gyyyj*0.5+\gyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\gyyyj*0.5+\gyyyl*0.5) {$I_C \approx \beta I_B$};
+
+\draw  (\swQEx, \gyyyd) node [ground] {} to [generic] (\swQEx, \gyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \gyyyd*0.5+\gyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+\draw  (\gxxxi-0.2,\gyyyn) --  (\gxxxi+0.2,\gyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+\draw [->] (gpppin) -- (gpppim) node [right] {$I$};  
+\draw  (gpppim) -- (gpppil);
+\fill  (gpppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (gpppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \gyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \gyyyd + 0.4)$);
+
+\draw [->] ($(\gxxxe+0.4, \gyyyl*0.5+\gyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\gxxxe+0.4, \gyyyl*0.5+\gyyyj*0.5 - 0.6)$);
+
+
+\pgfmathsetmacro{\bigswQCx}{\swQCx}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% The following is the first circuit, which uses "h" coordinate system, to be inserted into and connected to the above circuit.
+% It is modified based on Figure 2.
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword "h".
+\input{coordh}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (hpppii)) with letters as background, which would help to determine all coordinates. 
+%\coordinatebackground{h}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (hpppii) and name it as "swopamp".
+\draw (hpppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\hxxxg,\swopampzy)$);
+%\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\hxxxg,\swopampfy)$);
+%\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\hxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (hpppmi) and name it as "swQ".
+\draw (hpppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\hyyyj)$);
+%\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\hyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (hpppef) -- (hpppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+\fill  (\hxxxe,\gyyyi) circle (2pt);
+\draw  (\hxxxe,\gyyyi) -- (hppped) to [empty ZZener diode] (hpppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\hyyyd" and "\hyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\hyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\hxxxe-1.3, \hyyyd*0.5+\hyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (hpppej) to [generic] (hpppel) -| (swQ.C);
+\node at ($(\hxxxe-1.1, \hyyyj*0.5+\hyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\hyyyj*0.5+\hyyyl*0.5) {$I_C \approx \beta I_B$};
+
+\fill  (\bigswQCx, \hyyyd) circle (2pt);
+\draw  (\bigswQCx, \hyyyd) -- (\swQEx, \hyyyd) to [generic] (\swQEx, \hyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \hyyyd*0.5+\hyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+%\draw  (\hxxxi-0.2,\hyyyn) --  (\hxxxi+0.2,\hyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+%\draw [->] (hpppin) -- (hpppim) node [right] {$I$};  
+%\draw  (hpppim) -- (hpppil);
+%\fill  (hpppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (hpppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \hyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \hyyyd + 0.4)$);
+
+\draw [->] ($(\hxxxe+0.4, \hyyyl*0.5+\hyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\hxxxe+0.4, \hyyyl*0.5+\hyyyj*0.5 - 0.6)$);
+
+\pgfmathsetmacro{\secondopampzy}{\swopampzy}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% The following is the second circuit, which uses "s" coordinate system, to be inserted into and connected the above circuit as well. It is modified based on Figure 6. 
+
+\input{coords}
+%\coordinatebackground{s}{f}{g}{q};
+\draw (spppni) node [op amp] (opamp) {};
+\getxyingivenunit{cm}{(opamp.+)}{\opampzx}{\opampzy};
+\getxyingivenunit{cm}{(opamp.-)}{\opampfx}{\opampfy};
+
+
+\fill  (\sxxxg, \secondopampzy) circle (2pt);
+\draw (\sxxxg, \secondopampzy) -- (\sxxxg,\opampzy) node [left] {$U_{we}$} to [R, l=$R_d$, -*]  (\sxxxj,\opampzy) 
+to [R, l=$R_d$, *-*] (opamp.+)
+to [C, l_=$C_{d2}$, *-] (\opampzx, \syyyf) -- (\opampzx, \gyyyi);
+\fill (\opampzx, \gyyyi) circle (2pt);
+
+
+\draw (opamp.out) |- (\sxxxl,\syyyk) to [C, l_=$C_{d1}$, *-] (\sxxxj,\syyyk) to [short](\sxxxj,\opampzy);
+
+\draw (opamp.-) -|  (\sxxxl,\syyyk);
+
+\getxyingivenunit{cm}{(opamp.out)}{\opampoutx}{\opampouty};
+\draw (opamp.out) to [short, *-*] (\bigswQCx,\opampouty);
+
+\end{circuitikz}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+{\Large Figure 9, deleting the coordinate background by commenting out the only one command \\
+``\textbackslash coordinatebackground ..." line.}
+
+
+\begin{circuitikz}[scale=1]
+
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword ``g".
+\input{coordg}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (gpppii)) with letters as background, which would help to determine all coordinates. 
+%\coordinatebackground{g}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (gpppii) and name it as "swopamp".
+\draw (gpppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\gxxxg,\swopampzy)$);
+%\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\gxxxg,\swopampfy)$);
+%\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\gxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (gpppmi) and name it as "swQ".
+\draw (gpppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\gyyyj)$);
+%\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\gyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (gpppef) -- (gpppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+\draw  (gppped) node [ground] {} to [empty ZZener diode] (gpppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\gyyyd" and "\gyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\gyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\gxxxe-1.3, \gyyyd*0.5+\gyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (gpppej) to [generic] (gpppel) -| (swQ.C);
+\node at ($(\gxxxe-1.1, \gyyyj*0.5+\gyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\gyyyj*0.5+\gyyyl*0.5) {$I_C \approx \beta I_B$};
+
+\draw  (\swQEx, \gyyyd) node [ground] {} to [generic] (\swQEx, \gyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \gyyyd*0.5+\gyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+\draw  (\gxxxi-0.2,\gyyyn) --  (\gxxxi+0.2,\gyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+\draw [->] (gpppin) -- (gpppim) node [right] {$I$};  
+\draw  (gpppim) -- (gpppil);
+\fill  (gpppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (gpppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \gyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \gyyyd + 0.4)$);
+
+\draw [->] ($(\gxxxe+0.4, \gyyyl*0.5+\gyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\gxxxe+0.4, \gyyyl*0.5+\gyyyj*0.5 - 0.6)$);
+
+
+\pgfmathsetmacro{\bigswQCx}{\swQCx}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% The following is the first circuit, which uses "h" coordinate system, to be inserted into and connected to the above circuit.
+% It is modified based on Figure 2.
+
+% Circuits can be drawn by the following five major steps, as shown in the following example. 
+
+% Step 1, preparations. 
+
+% "Install" the coordinate system with keyword "h".
+\input{coordh}
+
+% Draw related part of the coordinate system with dashed helplines (centered at (hpppii)) with letters as background, which would help to determine all coordinates. 
+%\coordinatebackground{h}{c}{d}{o};
+
+% Step 2, draw key devices, their accessories, and take related coordinates of their pins, and may define more coordinates. 
+
+% Draw the Opamp at the coordinate (hpppii) and name it as "swopamp".
+\draw (hpppii) node [op amp, yscale=-1] (swopamp) {\ctikzflipy{Opamp}} ; 
+
+% Its accessories and lables. 
+\draw [-*](swopamp.down) -- ($(swopamp.down)+(0,1)$) node[right]{$V_+$}; 
+\node at ($(swopamp.down)+(0.3,0.2)$) {7};  
+\draw [-*](swopamp.up) -- ($(swopamp.up)+(0,-1)$) node[right]{$V_-$}; 
+\node at ($(swopamp.up)+(0.3,-0.2)$) {4};
+
+% Get the x- and y-components of the coordinates of the "+" and "-" pins. 
+\getxyingivenunit{cm}{(swopamp.+)}{\swopampzx}{\swopampzy};
+\getxyingivenunit{cm}{(swopamp.-)}{\swopampfx}{\swopampfy};
+
+% Then define a few more coordinates, at least for keeping in mind.
+\coordinate (plusshort) at ($(\hxxxg,\swopampzy)$);
+%\fill  (plusshort) circle (2pt);  % May be commented later.
+\coordinate (minusshort) at ($(\hxxxg,\swopampfy)$);
+%\fill  (minusshort) circle (2pt); % May be commented later.
+\coordinate (leftinter) at ($(\hxxxe,\swopampzy)$);
+\fill  (leftinter) circle (2pt);
+
+% Draw an "npn" at (hpppmi) and name it as "swQ".
+\draw (hpppmi) node[npn](swQ){};
+
+% Get the x- and y-components of the needed pins of it for later usage.
+\getxyingivenunit{cm}{(swQ.C)}{\swQCx}{\swQCy};
+\getxyingivenunit{cm}{(swQ.E)}{\swQEx}{\swQEy};
+
+% Then define more coordinate(s).
+\coordinate (Qcshort) at ($(\swQEx,\hyyyj)$);
+%\fill  (Qcshort) circle (2pt); % May be commented later.
+\coordinate (Qeshort) at ($(\swQEx,\hyyyf)$);
+\fill  (Qeshort) circle (2pt) node [right] {$V_0$};
+
+% Then the rectangle by the points (hpppef) -- (hpppej) -- (Qcshort) -- (Qeshort) forms a clear area for the key devices. 
+
+% Connect the two devices.
+\draw (swopamp.out) to [short, l=$I_B$, above] (swQ.B);
+
+% Step 3, draw other little devices. For tidiness, better to give two units in length for each new device and align them up.
+
+% For this specific circuit, let us attach the four bi-pole devices (maybe with their accessories) to each corner of the above mentioned rectangle area for the key devices, separately. 
+
+\fill  (\hxxxe,\gyyyi) circle (2pt);
+\draw  (\hxxxe,\gyyyi) -- (hppped) to [empty ZZener diode] (hpppef) -- (leftinter);
+% The Latex system can not work properly when I put the following label into the above "[empty ZZener diode]" in the form of an additional "l= ..." option, then I have to employ the following "\node ..." command. Then the label should be aligned with the "ZZener" as much as possible even the coordinate system is modified later. Since the "\hyyyd" and "\hyyyf" micros are used to position the "ZZener", then better to use the center between them to locate the label, rather than using "\hyyye" directly. This idea is also applied in later "\node ..." commands. 
+\node at ($(\hxxxe-1.3, \hyyyd*0.5+\hyyyf*0.5)$) {$V_Z = 5\textnormal{V}$};
+
+\draw (hpppej) to [generic] (hpppel) -| (swQ.C);
+\node at ($(\hxxxe-1.1, \hyyyj*0.5+\hyyyl*0.5)$) {$R_{1}=47k\Omega$};
+\node [right] at (\swQCx,\hyyyj*0.5+\hyyyl*0.5) {$I_C \approx \beta I_B$};
+
+\fill  (\bigswQCx, \hyyyd) circle (2pt);
+\draw  (\bigswQCx, \hyyyd) -- (\swQEx, \hyyyd) to [generic] (\swQEx, \hyyyf) -- (swQ.E);
+\node at ($(\swQEx+1.4, \hyyyd*0.5+\hyyyf*0.5)$) {$R_{E}=100k\Omega$};
+
+% Draw the top area. 
+%\draw  (\hxxxi-0.2,\hyyyn) --  (\hxxxi+0.2,\hyyyn) node [right] {$V_{cc}=15\textnormal{V}$} ;
+%\draw [->] (hpppin) -- (hpppim) node [right] {$I$};  
+%\draw  (hpppim) -- (hpppil);
+%\fill  (hpppil) circle (2pt);
+
+% Step 4, other shorts.
+\draw  (swopamp.+)  to [short, l_=$I_+ \approx 0 $, above] (plusshort) -- (leftinter) -- (hpppej);
+
+\draw  (swopamp.-)  to [short, l_=$I_- \approx 0 $, above] (minusshort) |- (Qeshort);
+
+%Step 5, all the rest, especially labels. May also clean unnecessary staff, like the system background and dark points for showing newly defined coordinates previously. 
+\draw [->] ($(\swQEx-0.4, \hyyyf - 0.4)$) -- node [left] {$I_E$} ($(\swQEx-0.4, \hyyyd + 0.4)$);
+
+\draw [->] ($(\hxxxe+0.4, \hyyyl*0.5+\hyyyj*0.5 + 0.6)$) -- node [right] {$I_1$} ($(\hxxxe+0.4, \hyyyl*0.5+\hyyyj*0.5 - 0.6)$);
+
+\pgfmathsetmacro{\secondopampzy}{\swopampzy}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% The following is the second circuit, which uses "s" coordinate system, to be inserted into and connected the above circuit as well. It is modified based on Figure 6. 
+
+\input{coords}
+%\coordinatebackground{s}{f}{g}{q};
+\draw (spppni) node [op amp] (opamp) {};
+\getxyingivenunit{cm}{(opamp.+)}{\opampzx}{\opampzy};
+\getxyingivenunit{cm}{(opamp.-)}{\opampfx}{\opampfy};
+
+
+\fill  (\sxxxg, \secondopampzy) circle (2pt);
+\draw (\sxxxg, \secondopampzy) -- (\sxxxg,\opampzy) node [left] {$U_{we}$} to [R, l=$R_d$, -*]  (\sxxxj,\opampzy) 
+to [R, l=$R_d$, *-*] (opamp.+)
+to [C, l_=$C_{d2}$, *-] (\opampzx, \syyyf) -- (\opampzx, \gyyyi);
+\fill (\opampzx, \gyyyi) circle (2pt);
+
+
+\draw (opamp.out) |- (\sxxxl,\syyyk) to [C, l_=$C_{d1}$, *-] (\sxxxj,\syyyk) to [short](\sxxxj,\opampzy);
+
+\draw (opamp.-) -|  (\sxxxl,\syyyk);
+
+\getxyingivenunit{cm}{(opamp.out)}{\opampoutx}{\opampouty};
+\draw (opamp.out) to [short, *-*] (\bigswQCx,\opampouty);
+
+\end{circuitikz}
+
+
+
+
+
+
+
+
+\end{document}
+
