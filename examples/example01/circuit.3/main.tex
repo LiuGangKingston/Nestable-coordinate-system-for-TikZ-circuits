@@ -1,0 +1,118 @@
+% This is circuit 3 of example 01 of
+% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-TikZ-circuits.git
+
+
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[siunitx]{circuitikz}
+\usetikzlibrary{shapes,arrows,positioning}
+\input{afewmorecommandsintikzpiture}
+
+
+\begin{document}
+
+\ctikzset{
+/tikz/circuitikz/bipoles/length=1cm
+}
+
+
+
+ 
+ 
+\begin{circuitikz} [scale=0.8]
+ 
+%%%%%% The next line is for circuit 3.
+\input{coordgliua}
+
+% Draw related part of the coordinate system with dashed helplines with letters as background, which would help to determine all coordinates. 
+\coordinatebackgroundxy{gangliu} {f}{g}{v} {f}{g}{q};
+
+%%%%%% The next line is for circuit 3.
+\coordinatebackgroundxy{gliua}{a}{b}{h} {a}{b}{h};
+
+% The next line is for moving the circuit to the center a little bit only, but the drawn line is not visible.
+\draw [white] (gangliupppdp) -- (gangliupppgp);
+
+
+% Draw the Opamp at the coordinate (gangliupppli) and name it as "myopamp".
+\draw (gangliupppli) node [op amp] (myopamp) {};
+
+% Retrieve the x- and y-components of the coordinates of the "+", "-", and "out" pins of myopamp, supposing we have no idea about them beforehand. 
+\getxyingivenunit{cm}{(myopamp.+)}
+                 {\myopamppx}{\myopamppy};
+\getxyingivenunit{cm}{(myopamp.-)}
+                 {\myopampmx}{\myopampmy};
+\getxyingivenunit{cm}{(myopamp.out)}
+                 {\myopampox}{\myopampoy};
+
+\draw (myopamp.-) -| (gangliupppjj) 
+      to [R, l_=$R_F \text{=} 300K \Omega$,
+                         label/align=rotate] 
+      (gangliupppjm) 
+%%%%%% removed for circuit 2: -| (gangliupppni)
+      ;
+
+\draw [-o] (myopamp.out) 
+      to[short, xshift=1mm] 
+      (\gangliuxxxr, \myopampoy) 
+      node [anchor=north, yshift=-1mm] {$V_0$};
+
+\draw (\gangliuxxxj, \myopampmy) 
+      to [R, l_=$\hspace{-2mm} R \text{=} 100 K\Omega$] 
+      (\gangliuxxxh, \myopampmy) -- 
+      (gangliuppphi) node [ground]{};
+
+\draw [-o] (myopamp.+) 
+      to[short, xshift=-1mm] 
+      (\gangliuxxxj, \myopamppy) 
+      node [anchor=north, yshift=-1mm] {$V_i$};
+      
+      
+      
+
+%%%%%% The rest are added for circuit 2.      
+%%%%%% The rest are added for circuit 2.      
+
+\draw (gangliuppppi) |- (gangliupppno) --
+      (gangliupppnn);
+
+\draw (gangliupppnk) node [ground]{} --
+      (gangliupppnl) 
+      to[american potentiometer, n=mypot, 
+           l_=$R_P \text{=} 5 K \Omega$,   
+                       label/align=rotate] 
+      (gangliupppnn);
+
+
+%%%%%% Remove the following line for circuit 3. 
+%\draw (mypot.wiper) 
+%      node [red, anchor=south east] {$V_A$} -| 
+%      (gangliupppjm);
+
+
+%%%%%% Add the rest lines for circuit 3. 
+\getxyingivenunit{cm}{(mypot.wiper)}
+                 {\mypotwiperx}{\mypotwipery};
+
+\draw (mypot.wiper) 
+      node [red, anchor=south east] {$V_A$} --
+      (\gliuaxxxe, \mypotwipery);
+
+\draw (\gliuaxxxe, \mypotwipery)  
+      to[variable american resistor, n=resistora, 
+                     l=$R_D \text{=} 15K \Omega$] 
+      (\gliuaxxxb, \mypotwipery) 
+      node [red, anchor=south] {$V_B$};
+
+\draw (\gliuaxxxb, \mypotwipery) -- 
+      (gliuapppbd)
+      to [C, l=$C_D \text{=} 100 \mu F$] 
+      (gliuapppbb) node [ground] {};
+
+\draw (gangliupppjm) -- (\gliuaxxxb, \mypotwipery);
+
+
+\end{circuitikz}
+
+
+
+\end{document}
