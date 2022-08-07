@@ -1,0 +1,386 @@
+% This is circuit 4 of example 01 of
+% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-TikZ-circuits.git
+
+
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[siunitx]{circuitikz}
+\usetikzlibrary{shapes,arrows,positioning}
+\input{afewmorecommandsintikzpiture}
+
+
+\begin{document}
+
+
+\ctikzset{
+ /tikz/circuitikz/diodes/scale=0.8,
+ /tikz/circuitikz/bipoles/length=1cm
+}
+
+
+ 
+\begin{circuitikz} [scale=0.8]
+\input{coordglb}
+
+
+% Draw related part of the coordinate system with dashed helplines with letters as background. 
+%\coordinatebackgroundxy{gangliu}{b}{c}{v}{a}{b}{s};
+
+\draw (gangliupppbr) -- (gangliupppsr);
+
+\draw (gangliupppsr) 
+      to [R = $R_4 \text{=} 56 \Omega$] 
+      (gangliupppsp);
+ 
+\draw (gangliupppsp) 
+      to [full led = laser diode, label/align=rotate]
+      (gangliupppsn) node [ground]{};
+
+
+\node [nigfetd](nigfetd) at (gangliupppon) {F3055L};
+
+\node [anchor=south] at (nigfetd.G) {G};
+\node [anchor= west] at (nigfetd.D) {D};
+\node [anchor= west] at (nigfetd.S) {S};
+
+% To retrieve x- and y-component of the coordinates  (nigfetd.G), (nigfetd.D), and (nigfetd.S) separately. 
+\getxyingivenunit{cm}{(nigfetd.G)}
+                     {\nigfetdgx} {\nigfetdgy};
+\getxyingivenunit{cm}{(nigfetd.D)}
+                     {\nigfetddx} {\nigfetddy};
+\getxyingivenunit{cm}{(nigfetd.S)}
+                     {\nigfetdsx} {\nigfetdsy};
+
+\draw  (gangliupppqr) -- 
+       (gangliupppqq)
+       to [Telmech=M1, n=motor]
+       (\nigfetddx, \gangliuyyyq) --
+       (nigfetd.D);
+
+\node [xshift=-2mm] at (motor.block north east) {$-$};
+\node [xshift= 2mm] at (motor.block south east) {$+$};
+
+\draw  (gangliupppqq) -- 
+       (gangliupppqp)
+       to [full diode = 1N4001] 
+       (\nigfetddx, \gangliuyyyp);
+
+\draw  (nigfetd.S) -- 
+       (\nigfetdsx, \gangliuyyyk)
+          node [ground] {};
+
+ 
+% To draw LM555
+\draw [blue, line width=0.5mm] 
+      (gangliuppphk) rectangle (gangliupppkq);
+ 
+\node [blue, xshift=4mm] at (gangliupppio)
+      {\underline{LM555}};
+
+\draw (gangliupppir) -- 
+      (gangliupppiq) node [anchor=north] {8};
+
+\draw (gangliupppjr) -- 
+      (gangliupppjq) node [anchor=north] {4};
+
+
+\draw (nigfetd.G) 
+      to [R, l_=$R_2 \text{=} 330 \Omega $] 
+      (\gangliuxxxk, \nigfetdgy) 
+      node [anchor=east] {3};
+ 
+\draw (gangliupppkm) node [anchor=east] {1}  --
+      (gangliupppom) ;
+
+\draw (gangliupppkl) node [anchor=east] {5} 
+      to [C, l_=$C_2  \text{=} 0.01 \mu F$] 
+      (gangliupppnl) -- 
+      (\nigfetdsx, \gangliuyyyl);
+
+
+\draw (gangliupppdr) 
+      to [R = $R_1 \text{=} 1k \Omega$] 
+      (gangliupppdp) -- 
+      (gangliuppphp) node [anchor=west] {7};
+ 
+\draw (gangliupppdn) 
+      to [full diode = 1N4001, label/align=rotate]
+      (gangliupppdp);
+ 
+\draw (gangliupppgp) 
+      to [full diode = 1N4001, label/align=rotate]
+      (gangliupppgn);
+ 
+
+\draw (gangliupppgn) 
+      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                         n=mypot]
+      (gangliupppdn);
+
+\getxyingivenunit{cm}{(mypot.wiper)}
+                     {\mypotwiperx}{\mypotwipery};
+
+
+\draw (mypot.wiper) -- 
+      (\mypotwiperx, \gangliuyyym) -- 
+      (gangliuppphm) node [anchor=west] {6};
+
+\draw  (\mypotwiperx, \gangliuyyym) -- 
+       (\mypotwiperx, \gangliuyyyl) -- 
+       (gangliuppphl) node [anchor=west] {2};
+ 
+
+\draw  (\mypotwiperx, \gangliuyyyl) 
+       to [C, n = capacitorl] 
+       (\mypotwiperx, \gangliuyyyk) node[ground]{};
+
+\node [anchor=north west, xshift=2mm, yshift=.7mm] 
+      at (capacitorl) {$C_1 \text{=} 0.1 \mu F$};
+
+
+
+
+
+%%%%%%%%%%-----------------------------------
+%%%%%%%%%%-----------------------------------
+%%%%%%%%  repeat here
+%%%%%%%%%%-----------------------------------
+%%%%%%%%%%-----------------------------------
+% \input{coordgla}
+
+
+
+
+
+
+% Draw related part of the coordinate system with dashed helplines with letters as background. 
+%\coordinatebackgroundxy{gla}{b}{c}{v}{a}{b}{s};
+
+\draw (glapppbr) -- (glapppjr);
+
+\node [nigfetd](nigfetd) at (glapppon) {F3055L};
+
+\node [anchor=south] at (nigfetd.G) {G};
+\node [anchor= west] at (nigfetd.D) {D};
+\node [anchor= west] at (nigfetd.S) {S};
+
+% To retrieve x- and y-component of the coordinates  (nigfetd.G), (nigfetd.D), and (nigfetd.S) separately. 
+\getxyingivenunit{cm}{(nigfetd.G)}
+                     {\nigfetdgx} {\nigfetdgy};
+\getxyingivenunit{cm}{(nigfetd.D)}
+                     {\nigfetddx} {\nigfetddy};
+\getxyingivenunit{cm}{(nigfetd.S)}
+                     {\nigfetdsx} {\nigfetdsy};
+
+\draw  (glapppqr) -- 
+       (glapppqq)
+       to [Telmech=M2, n=motor]
+       (\nigfetddx, \glayyyq) --
+       (nigfetd.D);
+
+\node [xshift=-2mm] at (motor.block north east) {$-$};
+\node [xshift= 2mm] at (motor.block south east) {$+$};
+
+\draw  (glapppqq) -- 
+       (glapppqp)
+       to [full diode = 1N4001] 
+       (\nigfetddx, \glayyyp);
+
+\draw  (nigfetd.S) -- 
+       (\nigfetdsx, \glayyyk)
+          node [ground] {};
+
+ 
+% To draw LM555
+\draw [blue, line width=0.5mm] 
+      (glappphk) rectangle (glapppkq);
+ 
+\node [blue, xshift=4mm] at (glapppio)
+      {\underline{LM555}};
+
+\draw (glapppir) -- 
+      (glapppiq) node [anchor=north] {8};
+
+\draw (glapppjr) -- 
+      (glapppjq) node [anchor=north] {4};
+
+
+\draw (nigfetd.G) 
+      to [R, l_=$R_2 \text{=} 330 \Omega $] 
+      (\glaxxxk, \nigfetdgy) 
+      node [anchor=east] {3};
+ 
+\draw (glapppkm) node [anchor=east] {1}  --
+      (glapppom) ;
+
+\draw (glapppkl) node [anchor=east] {5} 
+      to [C, l_=$C_2  \text{=} 0.01 \mu F$] 
+      (glapppnl) -- 
+      (\nigfetdsx, \glayyyl);
+
+
+\draw (glapppdr) 
+      to [R = $R_1 \text{=} 1k \Omega$] 
+      (glapppdp) -- 
+      (glappphp) node [anchor=west] {7};
+ 
+\draw (glapppdn) 
+      to [full diode = 1N4001, label/align=rotate]
+      (glapppdp);
+ 
+\draw (glapppgp) 
+      to [full diode = 1N4001, label/align=rotate]
+      (glapppgn);
+ 
+
+\draw (glapppgn) 
+      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                         n=mypot]
+      (glapppdn);
+
+\getxyingivenunit{cm}{(mypot.wiper)}
+                     {\mypotwiperx}{\mypotwipery};
+
+
+\draw (mypot.wiper) -- 
+      (\mypotwiperx, \glayyym) -- 
+      (glappphm) node [anchor=west] {6};
+
+\draw  (\mypotwiperx, \glayyym) -- 
+       (\mypotwiperx, \glayyyl) -- 
+       (glappphl) node [anchor=west] {2};
+ 
+
+\draw  (\mypotwiperx, \glayyyl) 
+       to [C, n = capacitorl] 
+       (\mypotwiperx, \glayyyk) node[ground]{};
+
+\node [anchor=north west, xshift=2mm, yshift=.7mm] 
+      at (capacitorl) {$C_1 \text{=} 0.1 \mu F$};
+
+
+
+
+
+%%%%%%%%%%-----------------------------------
+%%%%%%%%%%-----------------------------------
+%%%%%%%%  repeat here
+%%%%%%%%%%-----------------------------------
+%%%%%%%%%%-----------------------------------
+
+
+
+% Draw related part of the coordinate system with dashed helplines with letters as background. 
+%\coordinatebackgroundxy{glb}{b}{c}{v}{a}{b}{s};
+
+\draw (glbpppbr) -- (glbpppjr);
+
+\node [nigfetd](nigfetd) at (glbpppon) {F3055L};
+
+\node [anchor=south] at (nigfetd.G) {G};
+\node [anchor= west] at (nigfetd.D) {D};
+\node [anchor= west] at (nigfetd.S) {S};
+
+% To retrieve x- and y-component of the coordinates  (nigfetd.G), (nigfetd.D), and (nigfetd.S) separately. 
+\getxyingivenunit{cm}{(nigfetd.G)}
+                     {\nigfetdgx} {\nigfetdgy};
+\getxyingivenunit{cm}{(nigfetd.D)}
+                     {\nigfetddx} {\nigfetddy};
+\getxyingivenunit{cm}{(nigfetd.S)}
+                     {\nigfetdsx} {\nigfetdsy};
+
+\draw  (glbpppqr) -- 
+       (glbpppqq)
+       to [Telmech=M3, n=motor]
+       (\nigfetddx, \glbyyyq) --
+       (nigfetd.D);
+
+\node [xshift=-2mm] at (motor.block north east) {$-$};
+\node [xshift= 2mm] at (motor.block south east) {$+$};
+
+\draw  (glbpppqq) -- 
+       (glbpppqp)
+       to [full diode = 1N4001] 
+       (\nigfetddx, \glbyyyp);
+
+\draw  (nigfetd.S) -- 
+       (\nigfetdsx, \glbyyyk)
+          node [ground] {};
+
+ 
+% To draw LM555
+\draw [blue, line width=0.5mm] 
+      (glbppphk) rectangle (glbpppkq);
+ 
+\node [blue, xshift=4mm] at (glbpppio)
+      {\underline{LM555}};
+
+\draw (glbpppir) -- 
+      (glbpppiq) node [anchor=north] {8};
+
+\draw (glbpppjr) -- 
+      (glbpppjq) node [anchor=north] {4};
+
+
+\draw (nigfetd.G) 
+      to [R, l_=$R_2 \text{=} 330 \Omega $] 
+      (\glbxxxk, \nigfetdgy) 
+      node [anchor=east] {3};
+ 
+\draw (glbpppkm) node [anchor=east] {1}  --
+      (glbpppom) ;
+
+\draw (glbpppkl) node [anchor=east] {5} 
+      to [C, l_=$C_2  \text{=} 0.01 \mu F$] 
+      (glbpppnl) -- 
+      (\nigfetdsx, \glbyyyl);
+
+
+\draw (glbpppdr) 
+      to [R = $R_1 \text{=} 1k \Omega$] 
+      (glbpppdp) -- 
+      (glbppphp) node [anchor=west] {7};
+ 
+\draw (glbpppdn) 
+      to [full diode = 1N4001, label/align=rotate]
+      (glbpppdp);
+ 
+\draw (glbpppgp) 
+      to [full diode = 1N4001, label/align=rotate]
+      (glbpppgn);
+ 
+
+\draw (glbpppgn) 
+      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                         n=mypot]
+      (glbpppdn);
+
+\getxyingivenunit{cm}{(mypot.wiper)}
+                     {\mypotwiperx}{\mypotwipery};
+
+
+\draw (mypot.wiper) -- 
+      (\mypotwiperx, \glbyyym) -- 
+      (glbppphm) node [anchor=west] {6};
+
+\draw  (\mypotwiperx, \glbyyym) -- 
+       (\mypotwiperx, \glbyyyl) -- 
+       (glbppphl) node [anchor=west] {2};
+ 
+
+\draw  (\mypotwiperx, \glbyyyl) 
+       to [C, n = capacitorl] 
+       (\mypotwiperx, \glbyyyk) node[ground]{};
+
+\node [anchor=north west, xshift=2mm, yshift=.7mm] 
+      at (capacitorl) {$C_1 \text{=} 0.1 \mu F$};
+
+
+\draw [] (gangliupppqp) -- (glapppqr);
+\draw [] (glapppqp) -- (glbpppqr);
+\draw [o-] (gangliupppbs) node [anchor = south] {5V}  -- (glbpppbr);
+
+\draw [white, *-*] (\gangliuxxxa - 3.0, \gangliuyyyv)   -- (gangliupppkv) ;
+
+
+\end{circuitikz}
+
+
+
+\end{document}
