@@ -48,3 +48,13 @@ More derails are shown in the example(s).
 
 
 
+Version 2.0 (coordinates.v2.0.f90) is updated, so that all additional coordinate-system files are generated according to the input file "in.dat". 
+For each additional coordinate-system file, the file "in.dat" offers five-line information as follows:
+                  the first line is the KEYWORD;
+                  the second line is the first letter of the x-direction of the coordinate system;
+                  the third line is the total number of the points in the x-direction of the coordinate system;
+                  the fourth line is the first letter of the y-direction of the coordinate system;
+                  and the fifth line is the total number of the points in the y-direction of the coordinate system.
+
+The "in.dat" file may contain as many groups of the above five lines as needed, then the coordinate-system files can be generated accordingly by running coordinates.v2.0.f90. 
+
