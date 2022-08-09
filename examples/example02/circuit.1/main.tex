@@ -1,0 +1,143 @@
+% This is circuit 1 of example 02 of
+% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-TikZ-circuits.git
+
+
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage[siunitx]{circuitikz}
+\usetikzlibrary{shapes,arrows,positioning}
+\input{afewmorecommandsintikzpiture}
+
+
+\begin{document}
+
+
+\ctikzset{
+ /tikz/circuitikz/diodes/scale=0.8,
+ /tikz/circuitikz/bipoles/length=1cm
+}
+
+
+ 
+\begin{circuitikz} [scale=0.8]
+\input{coordgangliu}
+
+
+% Draw related part of the coordinate system with dashed helplines with letters as background. 
+\coordinatebackgroundxy{gangliu}{b}{c}{v}{a}{b}{s};
+
+
+\node [nigfetd](nigfetd) at (gangliupppon) {F3055L};
+
+\node [anchor=south] at (nigfetd.G) {G};
+\node [anchor= west] at (nigfetd.D) {D};
+\node [anchor= west] at (nigfetd.S) {S};
+
+% To retrieve x- and y-component of the coordinates  (nigfetd.G), (nigfetd.D), and (nigfetd.S) separately. 
+\getxyingivenunit{cm}{(nigfetd.G)}
+                     {\nigfetdgx} {\nigfetdgy};
+\getxyingivenunit{cm}{(nigfetd.D)}
+                     {\nigfetddx} {\nigfetddy};
+\getxyingivenunit{cm}{(nigfetd.S)}
+                     {\nigfetdsx} {\nigfetdsy};
+
+\draw  [o-] (gangliupppbr) node [anchor=east] {$5V$} --
+       (\nigfetddx, \gangliuyyyr);
+
+\draw  (\nigfetddx, \gangliuyyyr)
+       to [Telmech=M1, n=motor]
+       (\nigfetddx, \gangliuyyyp) --
+       (nigfetd.D);
+
+\node [xshift= 2mm] at (motor.block north west) {$-$};
+\node [xshift= 2mm] at (motor.block south west) {$+$};
+
+\draw  (\nigfetddx, \gangliuyyyp) --
+       (gangliupppnp)
+       to [full diode = 1N4001, label/align=rotate] 
+       (gangliupppnr); 
+
+\draw  (nigfetd.S) -- 
+       (\nigfetdsx, \gangliuyyyk)
+          node [ground] {};
+
+ 
+% To draw LM555
+\draw [blue, line width=0.5mm] 
+      (gangliuppphk) rectangle (gangliupppkq);
+ 
+\node [blue, xshift=4mm] at (gangliupppio)
+      {\underline{LM555}};
+
+\draw (gangliupppir) -- 
+      (gangliupppiq) node [anchor=north] {8};
+
+\draw (gangliupppjr) -- 
+      (gangliupppjq) node [anchor=north] {4};
+
+
+\draw (nigfetd.G) -- 
+      (\gangliuxxxn, \nigfetdgy) 
+      to [R, l_=$R_2 \text{=} 330 \Omega $] 
+      (\gangliuxxxk, \nigfetdgy) 
+      node [anchor=east] {3};
+ 
+\draw (gangliupppkm) node [anchor=east] {1}  --
+      (\nigfetdsx, \gangliuyyym);
+
+\draw (gangliupppkl) node [anchor=east] {5} 
+      to [C, l_=$C_2  \text{=} 0.01 \mu F$] 
+      (gangliupppnl) -- 
+      (\nigfetdsx, \gangliuyyyl);
+
+
+\draw (gangliupppdr) 
+      to [R = $R_1 \text{=} 1k \Omega$] 
+      (gangliupppdp) -- 
+      (gangliuppphp) node [anchor=west] {7};
+ 
+\draw (gangliupppdn) 
+      to [full diode = 1N4001, label/align=rotate]
+      (gangliupppdp);
+ 
+\draw (gangliupppgp) 
+      to [full diode = 1N4001, label/align=rotate]
+      (gangliupppgn);
+ 
+
+\draw (gangliupppgn) 
+      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                                       n=mypot]
+      (gangliupppdn);
+
+\getxyingivenunit{cm}{(mypot.wiper)}
+                     {\mypotwiperx}{\mypotwipery};
+
+
+\draw (mypot.wiper) -- 
+      (\mypotwiperx, \gangliuyyym) -- 
+      (gangliuppphm) node [anchor=west] {6};
+
+\draw  (\mypotwiperx, \gangliuyyym) -- 
+       (\mypotwiperx, \gangliuyyyl) -- 
+       (gangliuppphl) node [anchor=west] {2};
+ 
+
+\draw  (\mypotwiperx, \gangliuyyyl) 
+       to [C, n = capacitorl] 
+       (\mypotwiperx, \gangliuyyyk) node[ground]{};
+
+\node [anchor=north west, xshift=2mm, yshift=.7mm] 
+      at (capacitorl) {$C_1 \text{=} 0.1 \mu F$};
+
+
+
+
+% Move the whole circuit toward the paper center a little bit.
+\draw [white] (\gangliuxxxa - 3.0, \gangliuyyyv)   --
+           (gangliupppkv) ;
+
+
+\end{circuitikz}
+
+
+
+\end{document}
