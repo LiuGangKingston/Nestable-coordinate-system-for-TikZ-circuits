@@ -24,10 +24,10 @@
 \input{coordgliua}
 
 % Draw related part of the coordinate system with dashed helplines with letters as background, which would help to determine all coordinates. 
-%\coordinatebackgroundxy{gangliu} {f}{g}{v} {f}{g}{q};
+\coordinatebackgroundxy{gangliu} {f}{g}{v} {f}{g}{q};
 
 %%%%%% The next line is for circuit 3.
-%\coordinatebackgroundxy{gliua}{a}{b}{h} {a}{b}{h};
+\coordinatebackgroundxy{gliua}{a}{b}{h} {a}{b}{h};
 
 
 % Draw the Opamp at the coordinate (gangliupppli) and name it as "myopamp".
@@ -57,7 +57,10 @@
       (\gangliuxxxh, \myopampmy) -- 
       (gangliuppphi) node [ground]{};
 
-%      to [R, l_=$\hspace{-2mm} R \text{=} 100 K\Omega$] 
+%      to [R] 
+%      to [R = $R \text{=} 100 K\Omega$] 
+%      to [R, l_=$R \text{=} 100 K\Omega$] 
+%      to [R, l_=$\hspace{-2mm} R \text{=} 100 K\Omega$]
 %      to [R, n=resistorl] 
 %\node [anchor=south, xshift=-1mm, yshift=1mm] 
 %      at (resistorl) {$R \text{=} 100 K\Omega$};
