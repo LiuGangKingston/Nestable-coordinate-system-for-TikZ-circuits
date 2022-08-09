@@ -83,7 +83,8 @@
       (gangliupppjq) node [anchor=north] {4};
 
 
-\draw (nigfetd.G) 
+\draw (nigfetd.G) -- 
+      (\gangliuxxxn, \nigfetdgy) 
       to [R, l_=$R_2 \text{=} 330 \Omega $] 
       (\gangliuxxxk, \nigfetdgy) 
       node [anchor=east] {3};
@@ -112,7 +113,7 @@
  
 
 \draw (gangliupppgn) 
-      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                         n=mypot]
+      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                                       n=mypot]
       (gangliupppdn);
 
 \getxyingivenunit{cm}{(mypot.wiper)}
@@ -138,23 +139,29 @@
 
 
 
-
 %%%%%%%%%%-----------------------------------
 %%%%%%%%%%-----------------------------------
 %%%%%%%%  repeat here
 %%%%%%%%%%-----------------------------------
 %%%%%%%%%%-----------------------------------
-% \input{coordgla}
-
-
-
-
 
 
 % Draw related part of the coordinate system with dashed helplines with letters as background. 
 %\coordinatebackgroundxy{gla}{b}{c}{v}{a}{b}{s};
 
+% Modify the next drawing.
 \draw (glapppbr) -- (glapppjr);
+
+% Remove the next drawing.
+%\draw (glapppsr) 
+%      to [R = $R_4 \text{=} 56 \Omega$] 
+%      (glapppsp);
+ 
+% Remove the next drawing.
+%\draw (glapppsp) 
+%      to [full led = laser diode, label/align=rotate]
+%      (glapppsn) node [ground]{};
+
 
 \node [nigfetd](nigfetd) at (glapppon) {F3055L};
 
@@ -170,6 +177,7 @@
 \getxyingivenunit{cm}{(nigfetd.S)}
                      {\nigfetdsx} {\nigfetdsy};
 
+% Change "M1" into "M2":
 \draw  (glapppqr) -- 
        (glapppqq)
        to [Telmech=M2, n=motor]
@@ -203,7 +211,8 @@
       (glapppjq) node [anchor=north] {4};
 
 
-\draw (nigfetd.G) 
+\draw (nigfetd.G) -- 
+      (\glaxxxn, \nigfetdgy) 
       to [R, l_=$R_2 \text{=} 330 \Omega $] 
       (\glaxxxk, \nigfetdgy) 
       node [anchor=east] {3};
@@ -232,7 +241,7 @@
  
 
 \draw (glapppgn) 
-      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                         n=mypot]
+      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                                       n=mypot]
       (glapppdn);
 
 \getxyingivenunit{cm}{(mypot.wiper)}
@@ -266,11 +275,22 @@
 %%%%%%%%%%-----------------------------------
 
 
-
 % Draw related part of the coordinate system with dashed helplines with letters as background. 
 %\coordinatebackgroundxy{glb}{b}{c}{v}{a}{b}{s};
 
+% Modify the next drawing.
 \draw (glbpppbr) -- (glbpppjr);
+
+% Remove the next drawing.
+%\draw (glbpppsr) 
+%      to [R = $R_4 \text{=} 56 \Omega$] 
+%      (glbpppsp);
+
+% Remove the next drawing.
+%\draw (glbpppsp) 
+%      to [full led = laser diode, label/align=rotate]
+%      (glbpppsn) node [ground]{};
+
 
 \node [nigfetd](nigfetd) at (glbpppon) {F3055L};
 
@@ -286,6 +306,7 @@
 \getxyingivenunit{cm}{(nigfetd.S)}
                      {\nigfetdsx} {\nigfetdsy};
 
+% Change "M1" into "M3":
 \draw  (glbpppqr) -- 
        (glbpppqq)
        to [Telmech=M3, n=motor]
@@ -319,7 +340,8 @@
       (glbpppjq) node [anchor=north] {4};
 
 
-\draw (nigfetd.G) 
+\draw (nigfetd.G) -- 
+      (\glbxxxn, \nigfetdgy) 
       to [R, l_=$R_2 \text{=} 330 \Omega $] 
       (\glbxxxk, \nigfetdgy) 
       node [anchor=east] {3};
@@ -348,7 +370,7 @@
  
 
 \draw (glbpppgn) 
-      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                         n=mypot]
+      to [potentiometer, l_=$R_3\text{=} 100k \Omega$,                                                       n=mypot]
       (glbpppdn);
 
 \getxyingivenunit{cm}{(mypot.wiper)}
@@ -372,11 +394,17 @@
       at (capacitorl) {$C_1 \text{=} 0.1 \mu F$};
 
 
-\draw [] (gangliupppqp) -- (glapppqr);
-\draw [] (glapppqp) -- (glbpppqr);
-\draw [o-] (gangliupppbs) node [anchor = south] {5V}  -- (glbpppbr);
 
-\draw [white, *-*] (\gangliuxxxa - 3.0, \gangliuyyyv)   -- (gangliupppkv) ;
+
+% Further connectings:
+\draw (gangliupppqp) -- (glapppqr);
+\draw (glapppqp) -- (glbpppqr);
+\draw [o-] (gangliupppbs) node [anchor = south] {5V}  --  
+           (glbpppbr);
+
+% Move the whole circuit toward the paper center a little bit.
+\draw [white] (\gangliuxxxa - 3.0, \gangliuyyyv)   --
+           (gangliupppkv) ;
 
 
 \end{circuitikz}
