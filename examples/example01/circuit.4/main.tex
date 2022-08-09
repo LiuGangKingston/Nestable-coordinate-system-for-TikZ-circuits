@@ -24,16 +24,13 @@
 \input{coordgliub}
 
 % Draw related part of the coordinate system with dashed helplines with letters as background, which would help to determine all coordinates. 
-\coordinatebackgroundxy{gangliu} {f}{g}{v} {f}{g}{q};
+%\coordinatebackgroundxy{gangliu} {f}{g}{v} {f}{g}{q};
 
 %%%%%% The next line is for circuit 3.
-\coordinatebackgroundxy{gliua}{a}{b}{h} {a}{b}{h};
+%\coordinatebackgroundxy{gliua}{a}{b}{h} {a}{b}{h};
 
 %%%%%% The next line is for circuit 4.
-\coordinatebackgroundxy{gliub}{b}{c}{f} {a}{b}{g};
-
-% The next line is for moving the circuit to the center a little bit only, but the drawn line is not visible.
-\draw [white] (gangliupppdp) -- (gangliupppgp);
+%\coordinatebackgroundxy{gliub}{b}{c}{f} {a}{b}{g};
 
 
 % Draw the Opamp at the coordinate (gangliupppli) and name it as "myopamp".
@@ -47,27 +44,36 @@
 \getxyingivenunit{cm}{(myopamp.out)}
                  {\myopampox}{\myopampoy};
 
-\draw (myopamp.-) -| (gangliupppjj) 
-      to [R, l_=$R_F \text{=} 300K \Omega$,
-                         label/align=rotate] 
-      (gangliupppjm) 
-%%%%%% removed for circuit 2: -| (gangliupppni)
-      ;
-
 \draw [-o] (myopamp.out) 
-      to[short, xshift=1mm] 
+      to [short, xshift=1mm] 
       (\gangliuxxxr, \myopampoy) 
-      node [anchor=north, yshift=-1mm] {$V_0$};
+        node [anchor=north, yshift=-1mm] {$V_0$};
 
-\draw (\gangliuxxxj, \myopampmy) 
+\draw [-o] (myopamp.+) 
+      to [short, xshift=-1mm] 
+      (\gangliuxxxj, \myopamppy) 
+      node [anchor=north, yshift=-1mm] {$V_i$};
+
+\draw (myopamp.-) -- 
+      (\gangliuxxxj, \myopampmy) 
       to [R, l_=$\hspace{-2mm} R \text{=} 100 K\Omega$] 
       (\gangliuxxxh, \myopampmy) -- 
       (gangliuppphi) node [ground]{};
 
-\draw [-o] (myopamp.+) 
-      to[short, xshift=-1mm] 
-      (\gangliuxxxj, \myopamppy) 
-      node [anchor=north, yshift=-1mm] {$V_i$};
+%      to [R, l_=$\hspace{-2mm} R \text{=} 100 K\Omega$] 
+%      to [R, n=resistorl] 
+%\node [anchor=south, xshift=-1mm, yshift=1mm] 
+%      at (resistorl) {$R \text{=} 100 K\Omega$};
+
+      
+\draw (\gangliuxxxj, \myopampmy) -- 
+      (gangliupppjj) 
+      to [R, l_=$R_F \text{=} 300K \Omega$,
+                         label/align=rotate] 
+      (gangliupppjm);
+
+%%%%%% Remove the next line for circuit 2.
+% \draw (gangliupppjm) -| (gangliupppni);
       
 
 %%%%%% The rest are added for circuit 2.      
@@ -76,17 +82,19 @@
 \draw (gangliuppppi) |- (gangliupppno) --
       (gangliupppnn);
 
-\draw (gangliupppnk) node [ground]{} --
-      (gangliupppnl) 
+\draw (gangliupppnl) 
       to[american potentiometer, n=mypot, 
            l_=$R_P \text{=} 5 K \Omega$,   
                        label/align=rotate] 
       (gangliupppnn);
 
+\draw (gangliupppnl) -- 
+      (gangliupppnk) node [ground]{};
+
 
 %%%%%% Remove the following line for circuit 3. 
 %\draw (mypot.wiper) 
-%      node [red, anchor=south east] {$V_A$} -| 
+%        node [red, anchor=south east] {$V_A$} -| 
 %      (gangliupppjm);
 
 
@@ -95,42 +103,43 @@
                  {\mypotwiperx}{\mypotwipery};
 
 \draw (mypot.wiper) 
-      node [red, anchor=south east] {$V_A$} --
+        node [red, anchor=south east] {$V_A$} --
       (\gliuaxxxe, \mypotwipery);
 
 \draw (\gliuaxxxe, \mypotwipery)  
-      to[variable american resistor, n=resistora, 
-                     l=$R_D \text{=} 15K \Omega$] 
+      to[variable resistor = $R_D \text{=} 15K \Omega$] 
       (\gliuaxxxb, \mypotwipery) 
       node [red, anchor=south] {$V_B$};
 
 \draw (\gliuaxxxb, \mypotwipery) -- 
       (gliuapppbd)
-      to [C, l=$C_D \text{=} 100 \mu F$] 
+      to [C = $C_D \text{=} 100 \mu F$] 
       (gliuapppbb) node [ground] {};
 
 
 %%%%%% Remove the following line for circuit 4.
-%\draw (gangliupppjm) -- (\gliuaxxxb, \mypotwipery);
+%\draw (\gliuaxxxb, \mypotwipery) -| (gangliupppjm);
 
 
 %%%%%% Add the rest lines for circuit 4.
 
 \draw (\gliuaxxxb, \mypotwipery) --
       (\gliubxxxf, \mypotwipery)
-      to [C, l=$C_I \text{=} 200 \mu F$] 
+      to [C = $C_I \text{=} 200 \mu F$] 
       (\gliubxxxc, \mypotwipery);
 
 \draw (\gliubxxxc, \mypotwipery) -- 
       (gliubpppcd)
-      to[variable american resistor, n=resistorb, 
-                     l=$R_I \text{=} 39K \Omega$] 
+      to[variable resistor = $R_I \text{=} 39K \Omega$] 
       (gliubpppcb) node [ground] {};
-      
 
 \draw (\gliubxxxc, \mypotwipery) 
-        node [red, anchor=south] {$V_C$} --
+        node [red, anchor=south] {$V_C$} -|
       (gangliupppjm);
+
+
+% The next line is for moving the circuit to the center a little bit only, but the drawn line is not visible.
+\draw [white] (gangliupppdp) -- (gangliupppgp);
 
 
 \end{circuitikz}
