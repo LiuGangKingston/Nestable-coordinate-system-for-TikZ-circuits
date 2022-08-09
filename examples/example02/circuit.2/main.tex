@@ -59,10 +59,10 @@
 \node [xshift=-2mm] at (motor.block north east) {$-$};
 \node [xshift= 2mm] at (motor.block south east) {$+$};
 
-\draw  (gangliupppqq) -- 
-       (gangliupppqp)
-       to [full diode = 1N4001] 
-       (\nigfetddx, \gangliuyyyp);
+\draw  (\nigfetddx, \gangliuyyyp)
+       to [full diode, l_ = 1N4001] 
+       (gangliupppqp) --
+       (gangliupppqq); 
 
 \draw  (nigfetd.S) -- 
        (\nigfetdsx, \gangliuyyyk)
@@ -89,7 +89,7 @@
       node [anchor=east] {3};
  
 \draw (gangliupppkm) node [anchor=east] {1}  --
-      (gangliupppom) ;
+      (\nigfetdsx, \gangliuyyym);
 
 \draw (gangliupppkl) node [anchor=east] {5} 
       to [C, l_=$C_2  \text{=} 0.01 \mu F$] 
@@ -179,10 +179,10 @@
 \node [xshift=-2mm] at (motor.block north east) {$-$};
 \node [xshift= 2mm] at (motor.block south east) {$+$};
 
-\draw  (glapppqq) -- 
-       (glapppqp)
-       to [full diode = 1N4001] 
-       (\nigfetddx, \glayyyp);
+\draw  (\nigfetddx, \glayyyp)
+       to [full diode, l_ = 1N4001] 
+       (glapppqp) --
+       (glapppqq); 
 
 \draw  (nigfetd.S) -- 
        (\nigfetdsx, \glayyyk)
@@ -209,7 +209,7 @@
       node [anchor=east] {3};
  
 \draw (glapppkm) node [anchor=east] {1}  --
-      (glapppom) ;
+      (\nigfetdsx, \glayyym);
 
 \draw (glapppkl) node [anchor=east] {5} 
       to [C, l_=$C_2  \text{=} 0.01 \mu F$] 
@@ -295,10 +295,10 @@
 \node [xshift=-2mm] at (motor.block north east) {$-$};
 \node [xshift= 2mm] at (motor.block south east) {$+$};
 
-\draw  (glbpppqq) -- 
-       (glbpppqp)
-       to [full diode = 1N4001] 
-       (\nigfetddx, \glbyyyp);
+\draw  (\nigfetddx, \glbyyyp)
+       to [full diode, l_ = 1N4001] 
+       (glbpppqp) --
+       (glbpppqq); 
 
 \draw  (nigfetd.S) -- 
        (\nigfetdsx, \glbyyyk)
@@ -325,7 +325,7 @@
       node [anchor=east] {3};
  
 \draw (glbpppkm) node [anchor=east] {1}  --
-      (glbpppom) ;
+      (\nigfetdsx, \glbyyym);
 
 \draw (glbpppkl) node [anchor=east] {5} 
       to [C, l_=$C_2  \text{=} 0.01 \mu F$] 
