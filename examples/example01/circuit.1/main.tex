@@ -1,4 +1,4 @@
-% This is circuit 2 of example 01 of
+% This is circuit 1 of example 01 of
 % https://github.com/LiuGangKingston/Nestable-coordinate-system-for-TikZ-circuits.git
 
 
@@ -53,7 +53,6 @@
       (\gangliuxxxh, \myopampmy) -- 
       (gangliuppphi) node [ground]{};
 
-
 %      to [R] 
 %      to [R = $R \text{=} 100 K\Omega$] 
 %      to [R, l_=$R \text{=} 100 K\Omega$] 
@@ -69,29 +68,8 @@
                          label/align=rotate] 
       (gangliupppjm);
 
-%%%%%% Remove the next line for circuit 2.
-% \draw (gangliupppjm) -| (gangliupppni);
+\draw (gangliupppjm) -| (gangliupppni);
       
-
-%%%%%% The rest are added for circuit 2.      
-%%%%%% The rest are added for circuit 2.      
-
-\draw (gangliuppppi) |- (gangliupppno) --
-      (gangliupppnn);
-
-\draw (gangliupppnl) 
-      to[american potentiometer, n=mypot, 
-           l_=$R_P \text{=} 5 K \Omega$,   
-                       label/align=rotate] 
-      (gangliupppnn);
-
-\draw (gangliupppnl) -- 
-      (gangliupppnk) node [ground]{};
-
-
-\draw (mypot.wiper) 
-        node [red, anchor=south east] {$V_A$} -| 
-      (gangliupppjm);
 
 
 % The next line is for moving the circuit to the center a little bit only, but the drawn line is not visible.
