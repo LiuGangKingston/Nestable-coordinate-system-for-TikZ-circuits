@@ -91,7 +91,7 @@ end module
 program coordinates
     use data
     implicit none
-    integer :: linenumber = 0
+    integer :: linenumber = 0, newfiles = 0
     integer :: totalx, totaly, regenerate, ii, l, m, n
     character (len=linewidelimit) :: thekeyword, wordtmp, tmpword
     character (len=1) :: aaa, firstx, firsty
@@ -111,13 +111,18 @@ program coordinates
            aaa = char(96+ii)
            call filegenerating('coord'//aaa//'.tex', theoutputtunnel, aaa//xendkey, aaa//yendkey, aaa//pendkey, 'a', 26, 'a', 26)
         end do
+        write(*,*) "The above 27 coordinate system files were (re-)generated. "
+    else
+        write(*,*) "None of the above 27 coordinate system files were touched. "
     end if
+    write(*,*)
 
     linenumber = 0
     open(theinputtunnel, file=theinputfile)
     manyotherfiles: do
 
         linenumber = linenumber + 1
+        newfiles = newfiles + 1
         wordtmp = ' '
         read(theinputtunnel, '(a)', end = 100)  wordtmp
         thekeyword = ' '
@@ -193,9 +198,15 @@ program coordinates
         call filegenerating('coord'//thekeyword(1:l)//'.tex', theoutputtunnel, thekeyword(1:l)//xendkey, &
                                                     &thekeyword(1:l)//yendkey, thekeyword(1:l)//pendkey, &
                                                                           & firstx, totalx, firsty, totaly)
+        write(*,'(a,i5,a,a,i2,a,i2)') "New file #: ", newfiles, " was generated as: coord"//thekeyword(1:l)&
+                                       &  //".texb ased on: ", firstx//" ", totalx, " "//firsty//" ", totaly
+        write(*,*)
+
     end do manyotherfiles
 
+
     100 stop
+
 
 end program
 
