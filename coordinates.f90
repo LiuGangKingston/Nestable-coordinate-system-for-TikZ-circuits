@@ -46,6 +46,9 @@ subroutine filegenerating(thefile, thetunnel, xxx, yyy, ppp, firstx, totalx, fir
     write(thetunnel,'(a)') '% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-Tikz-circuits.git'
     write(thetunnel,'(a)')
     write(thetunnel,'(a)')
+    write(thetunnel,'(a)') '%\input{coordinates}'
+    write(thetunnel,'(a)')
+    write(thetunnel,'(a)')
 
     write(thetunnel,'(a,i2,a)') macroset//'\total'//xxx//'}{',totalx,'}'
     write(thetunnel,'(a,i2,a)') macroset//'\total'//yyy//'}{',totaly,'}'
