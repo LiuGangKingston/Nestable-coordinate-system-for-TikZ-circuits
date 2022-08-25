@@ -106,7 +106,7 @@ program coordinates
     write(*,*) '                 ...          '
     write(*,*) '                "coordz.tex" '
     write(*,*) '   to be (re-)generated, '
-    write(*,*) 'please reply with 1. Otherwise, any other integer value.'
+    write(*,*) 'please input 1. Otherwise, any other integer value.'
     read(*,*) regenerate
     if(regenerate.eq.1) then
         call filegenerating('coordinates.tex', theoutputtunnel, xendkey, yendkey, pendkey, 'a', 26, 'a', 26)
