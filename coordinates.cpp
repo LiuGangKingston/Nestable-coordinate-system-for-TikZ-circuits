@@ -59,6 +59,9 @@ namespace nestable_coordinate_system
 
         nestablefile << std::endl;
         nestablefile << std::endl;
+        nestablefile << "%\\input{coordinates}" << std::endl;
+        nestablefile << std::endl;
+        nestablefile << std::endl;
         nestablefile << macroset << "\\total" << truexxx << "}{" << totalx << "}" << std::endl;
         nestablefile << macroset << "\\total" << trueyyy << "}{" << totaly << "}" << std::endl;
         nestablefile << macrosets << truexxx << spacing << "}{1}" << std::endl;
@@ -165,10 +168,10 @@ void generatingadditionalfiles()
     char firstxpoint, firstypoint;
     int newfiles = 0, linenumber = 0, totalxpoints, totalypoints;
 
-    std::ifstream theinput( "in.dat" );
+    std::ifstream theinput(theinputfile);
     if (theinput.fail())
     {
-        std::cout << " Failed in openning the \"in.dat\" file, then stopped. " << std::endl;
+        std::cout << " Failed in openning the " << theinputfile << " file, then stopped. " << std::endl;
         exit(1);
     }
 
@@ -180,7 +183,7 @@ void generatingadditionalfiles()
         if (left == std::string::npos)
         {
             std::cout << " No string at line #:" << linenumber
-                      << " of the \"in.dat\" file as KEYWORD, then stopped. " << std::endl;
+                      << " of the " << theinputfile << " file as KEYWORD, then stopped. " << std::endl;
             exit(1);
         }
         right = aline.find_last_not_of(whitespaces);
@@ -190,7 +193,7 @@ void generatingadditionalfiles()
         {
             if (ch < 'a' || ch > 'z')
             {
-                std::cout << "The string in line #: " << linenumber << " of the \"in.dat\" file "
+                std::cout << "The string in line #: " << linenumber << " of the " << theinputfile << " file "
                           << "would be used as the KEY-WORD in this coordinate system. "
                           << "However only lower-case English letters are allowed. "
                           << "Since other character: " << ch <<" is found, then stopped. "
@@ -206,13 +209,13 @@ void generatingadditionalfiles()
         if (left == std::string::npos)
         {
             std::cout << " Nothing at line #:" << linenumber
-                      << " of the \"in.dat\" file as the first point in the x-direction, then stopped. " << std::endl;
+                      << " of the " << theinputfile << " file as the first point in the x-direction, then stopped. " << std::endl;
             exit(1);
         }
         firstxpoint = aline[left];
         if (firstxpoint < 'a' || firstxpoint > 'z')
         {
-            std::cout << "The first character in line #: " << linenumber << " of the \"in.dat\" file "
+            std::cout << "The first character in line #: " << linenumber << " of the " << theinputfile << " file "
                       << "would be used as the first point in the x-direction. "
                       << "However only lower-case English letters are allowed. "
                       << "Since it is " << firstxpoint <<", then stopped. "
@@ -228,7 +231,7 @@ void generatingadditionalfiles()
         totalxpoints = std::stoi(aline);
         if (totalxpoints < 1 || totalxpoints > 'z' - firstxpoint + 1)
         {
-            std::cout << "The number in line #: " << linenumber << " of the \"in.dat\" file "
+            std::cout << "The number in line #: " << linenumber << " of the " << theinputfile << " file "
                       << "would be used as the total number of points in the x-direction. "
                       << "Since it is " << totalxpoints <<", too big/small, then stopped. "
                       << std::endl;
@@ -242,13 +245,13 @@ void generatingadditionalfiles()
         if (left == std::string::npos)
         {
             std::cout << " Nothing at line #:" << linenumber
-                      << " of the \"in.dat\" file as the first point in the y-direction, then stopped. " << std::endl;
+                      << " of the " << theinputfile << " file as the first point in the y-direction, then stopped. " << std::endl;
             exit(1);
         }
         firstypoint = aline[left];
         if (firstypoint < 'a' || firstypoint > 'z')
         {
-            std::cout << "The first character in line #: " << linenumber << " of the \"in.dat\" file "
+            std::cout << "The first character in line #: " << linenumber << " of the " << theinputfile << " file "
                       << "would be used as the first point in the y-direction. "
                       << "However only lower-case English letters are allowed. "
                       << "Since it is " << firstypoint <<", then stopped. "
@@ -264,7 +267,7 @@ void generatingadditionalfiles()
         totalypoints = std::stoi(aline);
         if (totalypoints < 1 || totalypoints > 'z' - firstypoint + 1)
         {
-            std::cout << "The number in line #: " << linenumber << " of the \"in.dat\" file "
+            std::cout << "The number in line #: " << linenumber << " of the " << theinputfile << " file "
                       << "would be used as the total number of points in the y-direction. "
                       << "Since it is " << totalypoints <<", too big/small, then stopped. "
                       << std::endl;
