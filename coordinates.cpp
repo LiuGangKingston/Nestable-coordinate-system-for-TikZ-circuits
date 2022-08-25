@@ -132,7 +132,7 @@ void generatingdefaulfiles()
     std::cout << "                 ...          " << std::endl;
     std::cout << "                \"coordz.tex\" " << std::endl;
     std::cout << "   to be (re-)generated, " << std::endl;
-    std::cout << "please reply with 1. Otherwise, any other integer value." << std::endl;
+    std::cout << "please input 1. Otherwise, any other integer value." << std::endl;
     std::cin  >> regenerate;
     if (regenerate == 1)
     {
