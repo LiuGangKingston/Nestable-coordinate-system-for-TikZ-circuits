@@ -49,63 +49,63 @@ namespace nestable_coordinate_system
                                const char firstx,         const int totalx,
                                const char firsty,         const int totaly          ) noexcept
     {
-        static std::ofstream vestablefile;
+        static std::ofstream nestablefile;
         int firstxi, firstyi, ix, iy;
         char txo, txp, tyo, typ;
 
-        vestablefile.open(thefile);
-        vestablefile << "% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-Tikz-circuits.git" << std::endl;
-        vestablefile << "% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-Tikz-circuits.git" << std::endl;
+        nestablefile.open(thefile);
+        nestablefile << "% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-Tikz-circuits.git" << std::endl;
+        nestablefile << "% https://github.com/LiuGangKingston/Nestable-coordinate-system-for-Tikz-circuits.git" << std::endl;
 
-        vestablefile << std::endl;
-        vestablefile << std::endl;
-        vestablefile << macroset << "\\total" << truexxx << "}{" << totalx << "}" << std::endl;
-        vestablefile << macroset << "\\total" << trueyyy << "}{" << totaly << "}" << std::endl;
-        vestablefile << macrosets << truexxx << spacing << "}{1}" << std::endl;
-        vestablefile << macrosets << trueyyy << spacing << "}{1}" << std::endl;
-        vestablefile << macrosets << truexxx << firstx << "}{-8}" << std::endl;
-        vestablefile << macrosets << trueyyy << firsty << "}{-8}" << std::endl;
+        nestablefile << std::endl;
+        nestablefile << std::endl;
+        nestablefile << macroset << "\\total" << truexxx << "}{" << totalx << "}" << std::endl;
+        nestablefile << macroset << "\\total" << trueyyy << "}{" << totaly << "}" << std::endl;
+        nestablefile << macrosets << truexxx << spacing << "}{1}" << std::endl;
+        nestablefile << macrosets << trueyyy << spacing << "}{1}" << std::endl;
+        nestablefile << macrosets << truexxx << firstx << "}{-8}" << std::endl;
+        nestablefile << macrosets << trueyyy << firsty << "}{-8}" << std::endl;
 
-        vestablefile << std::endl;
+        nestablefile << std::endl;
         txo = firstx;
         for (ix = 1; ix < totalx; ix++)
         {
             txp = firstx + ix;
-            vestablefile << macrosets << truexxx << txp << "}{\\" << truexxx << txo
+            nestablefile << macrosets << truexxx << txp << "}{\\" << truexxx << txo
                          << " + \\" << truexxx << spacing << additional << std::endl;
             txo = txp;
         }
 
-        vestablefile << std::endl;
+        nestablefile << std::endl;
         tyo = firsty;
         for (iy = 1; iy < totaly; iy++)
         {
             typ = firsty + iy;
-            vestablefile << macrosets << trueyyy << typ << "}{\\" << trueyyy << tyo
+            nestablefile << macrosets << trueyyy << typ << "}{\\" << trueyyy << tyo
                          << " + \\" << trueyyy << spacing << additional << std::endl;
             tyo = typ;
         }
 
-        vestablefile << std::endl;
+        nestablefile << std::endl;
         for (ix = 0; ix < totalx; ix++)
         {
             txp = firstx + ix;
             for (iy = 0; iy < totaly; iy++)
             {
                 typ = firsty + iy;
-                vestablefile << coordinate << trueppp << txp << typ << ") at (\\"
+                nestablefile << coordinate << trueppp << txp << typ << ") at (\\"
                              << truexxx << txp << ", \\" << trueyyy << typ << ");" << std::endl;
             }
         }
 
-        vestablefile << std::endl;
+        nestablefile << std::endl;
         txp = firstx + totalx - 1;
         typ = firsty + totaly - 1;
-        vestablefile << "%\\gangprintcoordinateat{(0,0)}{The last coordinate values: }{($("
+        nestablefile << "%\\gangprintcoordinateat{(0,0)}{The last coordinate values: }{($("
                      << trueppp << txp << typ << ")$)}; " << std::endl;
 
-        vestablefile << std::endl;
-        vestablefile.close();
+        nestablefile << std::endl;
+        nestablefile.close();
 
     }
 
