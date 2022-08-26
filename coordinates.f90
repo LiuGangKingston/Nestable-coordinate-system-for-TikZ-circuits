@@ -202,7 +202,7 @@ program coordinates
                                                     &thekeyword(1:l)//yendkey, thekeyword(1:l)//pendkey, &
                                                                           & firstx, totalx, firsty, totaly)
         write(*,'(a,i5,a,a,i2,a,i2)') "New file #: ", newfiles, " was generated as: coord"//thekeyword(1:l)&
-                                       &  //".texb ased on: ", firstx//" ", totalx, " "//firsty//" ", totaly
+                                       &  //".tex based on: ", firstx//" ", totalx, " "//firsty//" ", totaly
         write(*,*)
 
     end do manyotherfiles
