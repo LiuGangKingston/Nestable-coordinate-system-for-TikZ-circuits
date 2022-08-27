@@ -111,34 +111,38 @@
 
 \draw (\gliuaxxxe, \mypotwipery)  
       to[variable resistor = $R_D \text{=} 15K \Omega$] 
-      (\gliuaxxxb, \mypotwipery) 
+      (\gangliuxxxl, \mypotwipery) 
       node [red, anchor=south] {$V_B$};
 
-\draw (\gliuaxxxb, \mypotwipery) -- 
-      (gliuapppbd)
+\draw (\gangliuxxxl, \mypotwipery) -- 
+      (gangliupppll)
       to [C = $C_D \text{=} 100 \mu F$] 
-      (gliuapppbb) node [ground] {};
+      (gangliuppplk) node [ground] {};
 
 
 %%%%%% Remove the following line for circuit 4.
-%\draw (\gliuaxxxb, \mypotwipery) -| (gangliupppjm);
+%\draw (\gangliuxxxl, \mypotwipery) -| (gangliupppjm);
 
 
 %%%%%% Add the rest lines for circuit 4.
 
-\draw (\gliuaxxxb, \mypotwipery) --
-      (\gliubxxxf, \mypotwipery)
+\draw (\gangliuxxxl, \mypotwipery) --
+      (\gangliuxxxk, \mypotwipery)
       to [C = $C_I \text{=} 200 \mu F$] 
       (\gliubxxxc, \mypotwipery);
 
 \draw (\gliubxxxc, \mypotwipery) -- 
-      (gliubpppcd)
+      (\gliubxxxc, \gangliuyyyl)
       to[variable resistor = $R_I \text{=} 39K \Omega$] 
-      (gliubpppcb) node [ground] {};
+      (\gliubxxxc, \gangliuyyyk) node [ground] {};
 
 \draw (\gliubxxxc, \mypotwipery) 
         node [red, anchor=south] {$V_C$} -|
       (gangliupppjm);
+
+
+% The next line is for moving the circuit to the center a little bit only, but the drawn line is not visible.
+%\draw [white] (gangliupppdp) -- (gangliupppgp);
 
 
 \end{circuitikz}
